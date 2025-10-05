@@ -13,21 +13,29 @@ async function update() {
         console.log(apps[i].name)
         if (["paintdotnet.exe"].includes(apps[i].name)) {
             app = apps[i];
+            break; // stop after first match
         }
     }
 
     let window;
     if (app) window = wi.getByPidSync(app.pid);
-    //if (window) window.filename = window.title.split(" -")[0];
-    window.version = window.title.split(" -")[1];
+
+    // Safe checks to avoid undefined errors
+    let version = "Unknown Version";
+    let filename = "Unknown";
+
+    if (window) {
+        version = window.title?.split(" -")[1] || "Unknown Version";
+        filename = window.title?.split(" -")[0] || "Unknown";
+    }
 
     client.setActivity({
-        details: window.version,
-        state: window && window.filename ? `Editing: ${window.filename}` : "Editing Unknown",
+        details: version,
+        state: `Editing: ${filename}`,
         startTimestamp: start,
         largeImageKey: "paint",
         largeImageText: "Paint.Net"
-    }, app.pid || null);
+    }, app?.pid || null);
 }
 
 update();
