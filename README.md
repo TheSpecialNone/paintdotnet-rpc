@@ -8,6 +8,9 @@ Discord Rich Presence for Paint.Net
 4. Launch Paint.Net
 5. `npm start`
 
+## Note
+This is just a fixed version made by me as a fun side project.
+
 ## Thank you
 This project was forked from FireController1847's photoshop-rich-presence (https://github.com/FireController1847/photoshop-rich-presence)
 
